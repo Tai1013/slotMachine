@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#slotMachine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    .slotMachine-reels {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 450px;
+        height: 450px;
+        background: #ddd;
+        overflow: hidden;
+    }
+}
+.reel {
+    position: relative;
+    &-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
