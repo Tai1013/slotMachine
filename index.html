@@ -6,37 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="css/main.min.css">
 </head>
 
 <body>
     <div id="app">
         <div id="slotMachine">
-            <div class="slotMachine-reels">
-                <div :style=`top:${reelData1.top}px` class="reel">
-                    <img class="reel-image" :src="reelData1.image[0]">
-                    <img class="reel-image" :src="reelData1.image[1]">
-                    <img class="reel-image" :src="reelData1.image[2]">
-                    <img class="reel-image" :src="reelData1.image[3]">
-                    <img class="reel-image" :src="reelData1.image[4]">
-                </div>
-                <div :style=`top:${reelData2.top}px` class="reel">
-                    <img class="reel-image" :src="reelData2.image[0]">
-                    <img class="reel-image" :src="reelData2.image[1]">
-                    <img class="reel-image" :src="reelData2.image[2]">
-                    <img class="reel-image" :src="reelData2.image[3]">
-                    <img class="reel-image" :src="reelData2.image[4]">
-                </div>
-                <div :style=`top:${reelData3.top}px` class="reel">
-                    <img class="reel-image" :src="reelData3.image[0]">
-                    <img class="reel-image" :src="reelData3.image[1]">
-                    <img class="reel-image" :src="reelData3.image[2]">
-                    <img class="reel-image" :src="reelData3.image[3]">
-                    <img class="reel-image" :src="reelData3.image[4]">
-                </div>
+            <div class="slotMachine-reels relative mx-auto flex justify-center items-center w-72 h-72 overflow-hidden">
+                <slot-reel ref="reel1" @stopped="reelStopped" :value="1" :max-speed="speed"></slot-reel>
+                <slot-reel ref="reel2" @stopped="reelStopped" :value="2" :max-speed="speed"></slot-reel>
+                <slot-reel ref="reel3" @stopped="reelStopped" :value="3" :max-speed="speed"></slot-reel>
+                <slot-line ref="winline"></slot-line>
+            </div>
+            <div class="slotMachine-bet">
+
+            </div>
+            <div class="slotMachine-btn">
+                <button @click="start()" :disabled="onload">開始</button>
+                <button @click="reset()" :disabled="onload">重置</button>
+                <button @click="onSpeedUp = !onSpeedUp">加速</button>
             </div>
         </div>
-        <button @click="start()" :disabled="onload">開始</button>
+
         <!-- <img :src="machine.machineData[0].image" alt=""> -->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"></script>

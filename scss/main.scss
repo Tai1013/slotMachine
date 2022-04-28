@@ -1,29 +1,43 @@
-body {
-    margin: 0;
-    padding: 0;
+.reel-image {
+    transform: scale(0.8);
 }
-
-#slotMachine {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    .slotMachine-reels {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 450px;
-        height: 450px;
-        background: #ddd;
-        overflow: hidden;
+.line {
+    &123 {
+        #tile1, #tile2, #tile3 {
+            animation: winReelTile 1s linear infinite;
+        }
+    }
+    &456 {
+        #tile4, #tile5, #tile6 {
+            animation: winReelTile 1s linear infinite;
+        }
+    }
+    &789 {
+        #tile7, #tile8, #tile9 {
+            animation: winReelTile 1s linear infinite;
+        }
+    }
+    &159 {
+        #tile1, #tile5, #tile9 {
+            animation: winReelTile 1s linear infinite;
+        }
+    }
+    &357 {
+        #tile3, #tile5, #tile7 {
+            animation: winReelTile 1s linear infinite;
+        }
     }
 }
-.reel {
-    position: relative;
-    &-image {
-        display: block;
-        width: 100%;
-        height: auto;
+
+@keyframes winReelTile {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 6px yellow);
+    }
+    100% {
+        transform: scale(0.8);
     }
 }
