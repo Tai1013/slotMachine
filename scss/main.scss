@@ -1,43 +1,59 @@
+body {
+    background: url(../img/background.jpg) bottom center fixed no-repeat;
+    background-size: cover;
+}
+
+#slotMachine {
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+    width: 82.95%;
+    height: 85.1%;
+}
+
 .reel-image {
-    transform: scale(0.8);
+    width: 67%;
 }
 .line {
     &123 {
-        #tile1, #tile2, #tile3 {
-            animation: winReelTile 1s linear infinite;
+        #tile1,
+        #tile2,
+        #tile3 {
+            animation: winReelTile 1s linear 0.1s infinite;
         }
     }
     &456 {
-        #tile4, #tile5, #tile6 {
-            animation: winReelTile 1s linear infinite;
+        #tile4,
+        #tile5,
+        #tile6 {
+            animation: winReelTile 1s linear 0.1s infinite;
         }
     }
     &789 {
-        #tile7, #tile8, #tile9 {
-            animation: winReelTile 1s linear infinite;
+        #tile7,
+        #tile8,
+        #tile9 {
+            animation: winReelTile 1s linear 0.1s infinite;
         }
     }
     &159 {
-        #tile1, #tile5, #tile9 {
-            animation: winReelTile 1s linear infinite;
+        #tile1,
+        #tile5,
+        #tile9 {
+            animation: winReelTile 1s linear 0.1s infinite;
         }
     }
     &357 {
-        #tile3, #tile5, #tile7 {
-            animation: winReelTile 1s linear infinite;
+        #tile3,
+        #tile5,
+        #tile7 {
+            animation: winReelTile 1s linear 0.1s infinite;
         }
     }
 }
 
 @keyframes winReelTile {
-    0% {
-        transform: scale(0.8);
-    }
     50% {
-        transform: scale(1);
         filter: drop-shadow(0 0 6px yellow);
-    }
-    100% {
-        transform: scale(0.8);
     }
 }

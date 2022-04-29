@@ -8,7 +8,7 @@ const app = new Vue({
             onload: false,
             resultData: [],
             onSpeedUp: false,
-            speed: 10,
+            speed: 15,
             reelWinData: [
                 {
                     tile: [1, 1, 1],
@@ -59,7 +59,7 @@ const app = new Vue({
             this.onload = !this.onload
 
             for (let i = 0; i < 3; i++) {
-                const delayTurns = Math.floor(Math.random() * (min * 2) + 1);
+                const delayTurns = Math.floor(Math.random() * min + 1);
                 if (i === 0) maxTurns.push(momentum)
                 else {
                     momentum += delayTurns
@@ -222,8 +222,8 @@ Vue.component('slot-reel', {
             let turns = 0, speed = 0
             setTimeout(() => {
                 const runReel = setInterval(() => {
-                    if ((this.reelTileTop + speed + 0.05) < reelTileHeight) {
-                        speed = speed < this.maxSpeed ? speed + 0.05 : this.maxSpeed
+                    if ((this.reelTileTop + speed + 0.1) < reelTileHeight) {
+                        speed = speed < this.maxSpeed ? speed + 0.1 : this.maxSpeed
                         if (onSpeedUp) return this.reelTileTop += this.maxSpeed
                         this.reelTileTop += speed
                     } else {
@@ -245,12 +245,12 @@ Vue.component('slot-reel', {
             }, 200 * this.value)
         }
     },
-    template: `<div :style="'top:' + reelTileTop + 'px'" class="reel relative">
-        <img class="reel-image w-24 h-24" :src="reelTileData[getTileIndex(reelTileIndex - 2)].image">
-        <img :id="'tile' + value" class="reel-image w-24 h-24" :src="reelTileData[getTileIndex(reelTileIndex - 1)].image">
-        <img :id="'tile' + (value + 3)" class="reel-image w-24 h-24" :src="reelTileData[getTileIndex(reelTileIndex)].image">
-        <img :id="'tile' + (value + 6)" class="reel-image w-24 h-24" :src="reelTileData[getTileIndex(reelTileIndex + 1)].image">
-        <img class="reel-image w-24 h-24" :src="reelTileData[getTileIndex(reelTileIndex + 2)].image">
+    template: `<div :style="'top:' + reelTileTop + 'px'" class="reel relative w-1/3">
+        <img class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex - 2)].image">
+        <img :id="'tile' + value" class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex - 1)].image">
+        <img :id="'tile' + (value + 3)" class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex)].image">
+        <img :id="'tile' + (value + 6)" class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex + 1)].image">
+        <img class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex + 2)].image">
     </div>`
 })
 
@@ -277,12 +277,22 @@ Vue.component('slot-line', {
             Object.assign(this.$data, this.$options.data());
         }
     },
-    template: `<div class="absolute inset-0">
-        <div v-if="line123" class="absolute top-0 left-0 flex justify-center items-center px-12 w-72 h-24"><span style="background-color:red" class="block w-full h-1"></span></div>
-        <div v-if="line456" class="absolute top-1/2 left-0 transform -translate-y-1/2 flex justify-center items-center px-12 w-72 h-24"><span style="background-color:blue" class="block w-full h-1"></span></div>
-        <div v-if="line789" class="absolute bottom-0 left-0 flex justify-center items-center px-12 w-72 h-24"><span style="background-color:orange" class="block w-full h-1"></span></div>
-        <div v-if="line159" class="absolute top-1/2 left-0 transform -translate-y-1/2 rotate-45 flex justify-center items-center px-2 w-72 h-24"><span style="background-color:yellow" class="block w-full h-1"></span></div>
-        <div v-if="line357" class="absolute top-1/2 left-0 transform -translate-y-1/2 -rotate-45 flex justify-center items-center px-2 w-72 h-24"><span style="background-color:green" class="block w-full h-1"></span></div>
+    template: `<div style="z-index: -1;" class="absolute inset-0">
+        <svg v-if="line123" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 w-full h-1/3" viewBox="0 0 220 50" fill="none" stroke="#fff" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M0 25 H220" />
+        </svg>
+        <svg v-if="line456" xmlns="http://www.w3.org/2000/svg" class="absolute top-1/3 left-0 w-full h-1/3" viewBox="0 0 220 50" fill="none" stroke="#fff" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M0 25 H220" />
+        </svg>
+        <svg v-if="line789" xmlns="http://www.w3.org/2000/svg" class="absolute bottom-0 left-0 w-full h-1/3" viewBox="0 0 220 50" fill="none" stroke="#fff" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M0 25 H220" />
+        </svg>
+        <svg v-if="line159" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 w-full h-full" viewBox="0 0 220 150" fill="none" stroke="#fff" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M0 25 H35 L185 125 H220" />
+        </svg>
+        <svg v-if="line357" xmlns="http://www.w3.org/2000/svg" class="absolute top-0 left-0 w-full h-full" viewBox="0 0 220 150" fill="none" stroke="#fff" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M0 125 H35 L185 25 H220" />
+        </svg>
     </div>`
 })
 
