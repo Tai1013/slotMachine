@@ -245,7 +245,7 @@ Vue.component('slot-reel', {
             }, 200 * this.value)
         }
     },
-    template: `<div :style="'top:' + reelTileTop + 'px'" class="reel relative w-1/3">
+    template: `<div :style="'margin-top:' + reelTileTop + 'px'" class="reel w-1/3">
         <img class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex - 2)].image">
         <img :id="'tile' + value" class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex - 1)].image">
         <img :id="'tile' + (value + 3)" class="reel-image mx-auto" :src="reelTileData[getTileIndex(reelTileIndex)].image">
