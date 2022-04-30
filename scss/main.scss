@@ -1,6 +1,14 @@
 body {
-    background: url(../img/background.jpg) bottom center fixed no-repeat;
-    background-size: cover;
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: url(../img/background.jpg) bottom center no-repeat;
+        background-size: cover;
+    }
 }
 
 #slotMachine {
