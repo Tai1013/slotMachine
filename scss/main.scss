@@ -1,14 +1,24 @@
 body {
+    background-color: #530c09;
     &::before {
         content: "";
         position: fixed;
         top: 0;
         left: 0;
+        z-index: -1;
         width: 100vw;
         height: 100vh;
         background: url(../img/background.jpg) bottom center no-repeat;
         background-size: cover;
     }
+}
+
+input {
+    outline: none;
+}
+
+.cursor-no-drop {
+    cursor: no-drop;
 }
 
 #slotMachine {
@@ -22,12 +32,21 @@ body {
 .reel-image {
     width: 67%;
 }
+
 .line {
     &123 {
         #tile1,
         #tile2,
         #tile3 {
             animation: winReelTile 1s linear 0.1s infinite;
+        }
+        #tile4,
+        #tile5,
+        #tile6,
+        #tile7,
+        #tile8,
+        #tile9 {
+            filter: brightness(0.75);
         }
     }
     &456 {
@@ -36,12 +55,28 @@ body {
         #tile6 {
             animation: winReelTile 1s linear 0.1s infinite;
         }
+        #tile1,
+        #tile2,
+        #tile3,
+        #tile7,
+        #tile8,
+        #tile9 {
+            filter: brightness(0.75);
+        }
     }
     &789 {
         #tile7,
         #tile8,
         #tile9 {
             animation: winReelTile 1s linear 0.1s infinite;
+        }
+        #tile1,
+        #tile2,
+        #tile3,
+        #tile4,
+        #tile5,
+        #tile6 {
+            filter: brightness(0.75);
         }
     }
     &159 {
@@ -50,6 +85,14 @@ body {
         #tile9 {
             animation: winReelTile 1s linear 0.1s infinite;
         }
+        #tile2,
+        #tile3,
+        #tile4,
+        #tile6,
+        #tile7,
+        #tile8 {
+            filter: brightness(0.75);
+        }
     }
     &357 {
         #tile3,
@@ -57,11 +100,86 @@ body {
         #tile7 {
             animation: winReelTile 1s linear 0.1s infinite;
         }
+        #tile1,
+        #tile2,
+        #tile4,
+        #tile6,
+        #tile8,
+        #tile9 {
+            filter: brightness(0.75);
+        }
     }
+}
+
+.slotMachine-reels {
+    @media (min-width: 1024px) {
+        min-height: 400px;
+    }
+}
+
+.slotMachine-block {
+    max-width: 1024px;
+    background: linear-gradient(45deg, #fcec88 0%, #ac5502 70%, #fcec88 100%);
+    border-radius: 4px;
+    > div {
+        background-color: #530c09;
+    }
+}
+
+#betBox {
+    button {
+        background: #d4a145;
+        box-shadow: 0px 0px 4px #fcec88 inset;
+        &:disabled {
+            opacity: 0.5;
+        }
+    }
+    input {
+        box-shadow: 0px 0px 4px #666 inset;
+    }
+}
+
+#doubleBox {
+    button {
+        &:disabled {
+            pointer-events: none;
+        }
+        &:not(:disabled) {
+            opacity: 0.5;
+        }
+    }
+}
+
+#totalBetBox {
+    svg {
+        color: #d4a145;
+    }
+    input {
+        box-shadow: 0px 0px 4px #666 inset;
+    }
+}
+
+.title {
+    color: #d4a145;
+}
+
+.slot-btn {
+    color: #d4a145;
+}
+
+.lineBet {
+    margin: 0;
+    padding: 0;
+    font-family: verdana;
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fcec88;
+    text-shadow: -1px -1px 1px #faf9f1, 1px 1px 1px #d4a145, 1px 2px 1px #d4a145, 1px 3px 1px #d4a145, 1px 4px 1px #d4a145, 1px 5px 1px #d4a145, 1px 6px 1px #d4a145, 1px 7px 1px #d4a145, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2);
+    animation: winReelTile 1s linear 0.1s infinite;
 }
 
 @keyframes winReelTile {
     50% {
-        filter: drop-shadow(0 0 6px yellow);
+        filter: drop-shadow(0 0 6px #fcec88);
     }
 }
