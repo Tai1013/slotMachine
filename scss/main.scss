@@ -6,8 +6,8 @@ body {
         top: 0;
         left: 0;
         z-index: -1;
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         background: url(../img/background.jpg) bottom center no-repeat;
         background-size: cover;
     }
@@ -21,16 +21,50 @@ input {
     cursor: no-drop;
 }
 
-#slotMachine {
-    left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
-    width: 82.95%;
-    height: 85.1%;
+#slotMachineOutBox {
+    width: 150vh;
+    height: 100vh;
+}
+
+#slotReels {
+    bottom: 4.5%;
+    left: 8%;
+    width: 84%;
+    height: 86.5%;
+}
+
+#slotButton {
+    background: linear-gradient(45deg, #fcec88 0%, #ac5502 70%, #fcec88 100%);
+    > div {
+        background-color: #530c09;
+    }
+    #slotBet {
+        font-size: 6vh;
+    }
+    .slot-title {
+        font-size: 2.5vh;
+        color: #d4a145;
+    }
+    .slot-menu {
+        font-size: 2.5vh;
+    }
+    .slot-input {
+        font-size: 2.5vh;
+        button {
+            background-color: #d4a145;
+        }
+        input {
+            box-shadow: 0px 0px 4px #666 inset;
+        }
+    }
+}
+
+.slot-btn {
+    color: #d4a145;
 }
 
 .reel-image {
-    width: 67%;
+    width: 66%;
 }
 
 .line {
@@ -111,67 +145,11 @@ input {
     }
 }
 
-.slotMachine-reels {
-    @media (min-width: 1024px) {
-        min-height: 400px;
-    }
-}
-
-.slotMachine-block {
-    max-width: 1024px;
-    background: linear-gradient(45deg, #fcec88 0%, #ac5502 70%, #fcec88 100%);
-    border-radius: 4px;
-    > div {
-        background-color: #530c09;
-    }
-}
-
-#betBox {
-    button {
-        background: #d4a145;
-        box-shadow: 0px 0px 4px #fcec88 inset;
-        &:disabled {
-            opacity: 0.5;
-        }
-    }
-    input {
-        box-shadow: 0px 0px 4px #666 inset;
-    }
-}
-
-#doubleBox {
-    button {
-        &:disabled {
-            pointer-events: none;
-        }
-        &:not(:disabled) {
-            opacity: 0.5;
-        }
-    }
-}
-
-#totalBetBox {
-    svg {
-        color: #d4a145;
-    }
-    input {
-        box-shadow: 0px 0px 4px #666 inset;
-    }
-}
-
-.title {
-    color: #d4a145;
-}
-
-.slot-btn {
-    color: #d4a145;
-}
-
 .lineBet {
     margin: 0;
     padding: 0;
     font-family: verdana;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     color: #fcec88;
     text-shadow: -1px -1px 1px #faf9f1, 1px 1px 1px #d4a145, 1px 2px 1px #d4a145, 1px 3px 1px #d4a145, 1px 4px 1px #d4a145, 1px 5px 1px #d4a145, 1px 6px 1px #d4a145, 1px 7px 1px #d4a145, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2);
@@ -181,5 +159,20 @@ input {
 @keyframes winReelTile {
     50% {
         filter: drop-shadow(0 0 6px #fcec88);
+    }
+}
+
+#screenBox {
+    svg {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+        animation: runMobileIcon 2s linear 1s infinite;
+    }
+}
+
+@keyframes runMobileIcon {
+    50%, 100% {
+        transform: translate(-50%, -50%) rotate(90deg);
+        opacity: 1;
     }
 }

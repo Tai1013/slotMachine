@@ -4,7 +4,6 @@ const app = new Vue({
             bet: 10,
             totalBet: 1000.00,
             double: 1,
-
             onload: false,
             onRepeat: false,
             onSpeedUp: false,
@@ -38,7 +37,6 @@ const app = new Vue({
                     class: 'line357'
                 },
             ],
-
             recordData: [],
             currentID: 0,
             currentDate: '',
@@ -46,6 +44,8 @@ const app = new Vue({
             currentReel: [],
             currentWin: 0,
             currentDetails: [],
+
+            isScreen: false
         }
     },
     watch: {
@@ -60,7 +60,24 @@ const app = new Vue({
             }
         }
     },
+    mounted() {
+        this.getScreen()
+        window.addEventListener('resize', this.getScreen)
+    },
     methods: {
+        getScreen() {
+            const screenWidth = window.innerWidth
+            const screenHeight = window.innerHeight
+            console.log(screenWidth, screenHeight)
+            if (screenWidth <= screenHeight) this.isScreen = true
+            else this.isScreen = false
+        },
+
+        twoDigits(val) {
+            if (val < 10) return "0" + val;
+            return val;
+        },
+
         reset() {
             Object.assign(this.$data, this.$options.data());
         },
@@ -71,17 +88,12 @@ const app = new Vue({
             const max = 30
             let momentum = Math.floor(Math.random() * (max - min + 1) + min);
             let maxTurns = []
-
-            function twoDigits(val) {
-                if (val < 10) return "0" + val;
-                return val;
-            }
-
+            
+            this.onload = !this.onload
             this.currentWin = 0
             this.currentID++
-            this.currentDate = today.getFullYear() + '-' + twoDigits(today.getMonth() + 1) + '-' + twoDigits(today.getDate())
-            this.currentTime = twoDigits(today.getHours()) + ":" + twoDigits(today.getMinutes()) + ":" + twoDigits(today.getSeconds())
-            this.onload = !this.onload
+            this.currentDate = today.getFullYear() + '-' + this.twoDigits(today.getMonth() + 1) + '-' + this.twoDigits(today.getDate())
+            this.currentTime = this.twoDigits(today.getHours()) + ":" + this.twoDigits(today.getMinutes()) + ":" + this.twoDigits(today.getSeconds())
             this.totalBet = this.totalBet - this.bet * this.double
 
             for (let i = 0; i < 3; i++) {
@@ -129,8 +141,6 @@ const app = new Vue({
                 if (tile3Name == 'scatter' && tile1Name == tile2Name) tailBet = doubleBet * r2.bonus / 2
 
                 if (tailBet > 0) {
-                    console.log('tailBet:' + tailBet + ' 水果倍率:' + tailBet / doubleBet)
-                    console.log('lineBet:' + lineBet + ' 線倍率:' + data.bet)
                     resultData.push({ 
                         class: data.class,
                         winBet: lineBet + tailBet
@@ -174,7 +184,7 @@ const app = new Vue({
         },
 
         animate(className, winBet, boolean) {
-            const slotMachineBox = document.getElementById('slotMachine')
+            const slotMachineBox = document.getElementById('slotReels')
             slotMachineBox.classList.add(className)
             this.$refs.winline.showLine(className, winBet)
             setTimeout(() => {
@@ -261,8 +271,6 @@ Vue.component('slot-reel', {
         this.reelTileData = shuffle(reels)
         this.reelTileIndex = this.reelTileData.length - 1
     },
-    mounted() {
-    },
     methods: {
         getTileIndex(num) {
             const maxLength = this.reelTileData.length
@@ -271,7 +279,7 @@ Vue.component('slot-reel', {
             return num
         },
         run(maxTurns) {
-            const reelTileHeight = document.getElementById('slotMachine').clientHeight / 3
+            const reelTileHeight = document.getElementById('slotReels').clientHeight / 3
             let turns = 0, speed = 0
             setTimeout(() => {
                 const runReel = setInterval(() => {
@@ -310,7 +318,6 @@ Vue.component('slot-reel', {
 })
 
 Vue.component('slot-line', {
-    props: [],
     data() {
         return {
             line123: false,
@@ -322,8 +329,6 @@ Vue.component('slot-line', {
             lineBet: 0
         }
     },
-    beforeMount() {
-    },
     watch: {
         line123() {
             if (this.line123) this.lineTop = 'top-0'
@@ -333,8 +338,6 @@ Vue.component('slot-line', {
             if (this.line789) this.lineTop = 'bottom-0'
             else this.lineTop = 'top-1/3'
         },
-    },
-    mounted() {
     },
     methods: {
         showLine(className, winBet) {
