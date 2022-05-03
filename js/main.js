@@ -1,8 +1,3 @@
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
-document.documentElement.style.setProperty('--vh', `${vh}px`);
-
 const app = new Vue({
     data() {
         return {
@@ -73,7 +68,6 @@ const app = new Vue({
         getScreen() {
             const screenWidth = window.innerWidth
             const screenHeight = window.innerHeight
-            console.log(screenWidth, screenHeight)
             if (screenWidth <= screenHeight) this.isScreen = true
             else this.isScreen = false
         },
@@ -93,7 +87,7 @@ const app = new Vue({
             const max = 30
             let momentum = Math.floor(Math.random() * (max - min + 1) + min);
             let maxTurns = []
-            
+
             this.onload = !this.onload
             this.currentWin = 0
             this.currentID++
@@ -146,11 +140,11 @@ const app = new Vue({
                 if (tile3Name == 'scatter' && tile1Name == tile2Name) tailBet = doubleBet * r2.bonus / 2
 
                 if (tailBet > 0) {
-                    resultData.push({ 
+                    resultData.push({
                         class: data.class,
                         winBet: lineBet + tailBet
                     })
-                    this.currentDetails.push({ 
+                    this.currentDetails.push({
                         tail: [tile1Name, tile2Name, tile3Name],
                         winBet: lineBet + tailBet
                     })
@@ -165,7 +159,7 @@ const app = new Vue({
                         this.currentWin += resultData[i].winBet
                     }, 1000 * this.winLineTime * i)
                 }
-            } 
+            }
             else this.end()
         },
 
@@ -181,11 +175,11 @@ const app = new Vue({
                 details: {
                     reel: this.currentReel,
                     win: this.currentDetails
-                },  
+                },
             })
             this.resultData.length = 0
             this.onload = false
-            if(!this.onload && this.onRepeat) this.start()
+            if (!this.onload && this.onRepeat) this.start()
         },
 
         animate(className, winBet, boolean) {
