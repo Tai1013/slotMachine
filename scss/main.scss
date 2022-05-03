@@ -24,7 +24,9 @@ input {
 
 #slotMachineOutBox {
     width: 150vh;
-    height: 100vh;
+    width: calc(var(--vh, 1vh) * 150);
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 #slotReels {
