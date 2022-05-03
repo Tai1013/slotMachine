@@ -14,8 +14,8 @@
     <div id="app">
         <div id="slotMachineOutBox" class="relative mx-auto p-2">
             <div class="w-full h-full">
-                <div id="slotMachine" class="pb-2 h-4/5">
-                    <div class="relative mx-auto w-max h-full">
+                <div id="slotMachine" class="pb-2 h-4/5 text-center">
+                    <div class="relative inline-block mx-auto h-full">
                         <img class="w-full h-full object-contain" src="img/bg_reel.png" alt="reel">
                         <div id="slotReels" class="absolute z-10 flex justify-center items-center overflow-hidden">
                             <slot-reel ref="reel1" @stopped="reelStopped" :value="1" :max-speed="speed"></slot-reel>
