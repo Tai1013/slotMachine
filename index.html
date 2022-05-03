@@ -31,7 +31,7 @@
                             <div class="flex items-center p-1 lg:p-2 w-full h-1/3">
                                 <p class="slot-title mr-1 font-bold whitespace-nowrap">下注 : </p>
                                 <div class="slot-input flex-auto flex items-center w-full h-full">
-                                    <button class="w-4 min-w-max h-full text-white"
+                                    <button class="w-4 lg:w-5 h-full text-white"
                                         :class="{'opacity-50 pointer-events-none': bet <= 5}" :disabled="bet <= 5"
                                         @click="bet = bet - 5">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none"
@@ -40,7 +40,7 @@
                                         </svg>
                                     </button>
                                     <input type="tel" class="w-full h-full text-center" v-model="bet">
-                                    <button class="w-4 min-w-max h-full text-white"
+                                    <button class="w-4 lg:w-5 h-full text-white"
                                         :class="{'opacity-50 pointer-events-none': bet + 5 > totalBet}"
                                         :disabled="bet + 5 > totalBet" @click="bet = bet + 5">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none"
