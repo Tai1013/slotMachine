@@ -70,8 +70,8 @@ const app = new Vue({
             const lineBet = document.getElementById('lineBet')
             const slotBet = document.getElementById('slotBet')
             const slotButton = document.getElementById('slotButton')
-            const screenWidth = window.innerWidth - 5
-            const screenHeight = window.innerHeight - 5
+            const screenWidth = window.innerWidth - 50
+            const screenHeight = window.innerHeight - 50
             
             if (screenWidth > screenHeight * 3 / 2) {
                 slotMachine.style.width = screenHeight * 3 / 2 + 'px'
