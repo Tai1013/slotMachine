@@ -1,12 +1,3 @@
-// window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
-//     if (window.orientation === 180 || window.orientation === 0) {
-//         alert('目前您的螢幕為縱向！');
-//     }
-//     if (window.orientation === 90 || window.orientation === -90 ){
-//         alert('目前您的螢幕為橫向！');
-//     }
-// }, false);
-
 const app = new Vue({
     data() {
         return {
@@ -46,7 +37,9 @@ const app = new Vue({
                     class: 'line357'
                 },
             ],
+            recordShow: false,
             recordData: [],
+            detailsData: [],
             currentID: 0,
             currentDate: '',
             currentTime: '',
@@ -71,10 +64,6 @@ const app = new Vue({
     },
     mounted() {
         this.getScreen()
-        if ("onorientationchange" in window) {
-            if (window.orientation === 180 || window.orientation === 0) this.isScreen = true
-            if (window.orientation === 90 || window.orientation === -90 ) this.isScreen = false
-        }
         window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", this.getScreen, false);
         window.addEventListener('resize', this.getScreen)
     },
@@ -123,7 +112,6 @@ const app = new Vue({
             let maxTurns = []
 
             this.onload = !this.onload
-            this.currentWin = 0
             this.currentID++
             this.currentDate = today.getFullYear() + '-' + this.twoDigits(today.getMonth() + 1) + '-' + this.twoDigits(today.getDate())
             this.currentTime = this.twoDigits(today.getHours()) + ":" + this.twoDigits(today.getMinutes()) + ":" + this.twoDigits(today.getSeconds())
@@ -153,6 +141,7 @@ const app = new Vue({
         checkResult(result) {
             const doubleBet = this.bet * this.double    //倍率下注額
             let resultData = []
+            this.currentDetails = []
             this.currentReel = [result[0][0].name, result[1][0].name, result[2][0].name, result[0][1].name, result[1][1].name, result[2][1].name, result[0][2].name, result[1][2].name, result[2][2].name]
             this.reelWinData.forEach((data, index) => {
                 const r1 = result[0][data.tile[0]]
@@ -198,20 +187,20 @@ const app = new Vue({
         },
 
         end() {
-            this.recordData.push({
+            this.recordData.unshift({
                 id: 'slot777-' + this.currentID,
                 date: this.currentDate,
                 time: this.currentTime,
                 bet: this.bet,
                 double: this.double,
-                winBet: this.currentWin,
-                winLoss: this.currentWin < 0 ? false : true,
+                winBet: this.currentWin - (this.bet * this.double),
+                winLoss: this.currentWin - (this.bet * this.double) >= 0 ? true : false,
                 details: {
                     reel: this.currentReel,
                     win: this.currentDetails
                 },
             })
-            this.resultData.length = 0
+            this.resultData = []
             this.onload = false
             if (!this.onload && this.onRepeat) this.start()
         },
@@ -225,7 +214,11 @@ const app = new Vue({
                 this.$refs.winline.hideLine(className, boolean)
                 if (boolean) this.end()
             }, 1000 * this.winLineTime)
-        }
+        },
+
+        getDetails(data) {
+            this.detailsData.push(data)
+        },
     }
 })
 
