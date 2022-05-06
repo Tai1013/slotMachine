@@ -1,11 +1,11 @@
-window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
-    if (window.orientation === 180 || window.orientation === 0) {
-        alert('目前您的螢幕為縱向！');
-    }
-    if (window.orientation === 90 || window.orientation === -90 ){
-        alert('目前您的螢幕為橫向！');
-    }
-}, false);
+// window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+//     if (window.orientation === 180 || window.orientation === 0) {
+//         alert('目前您的螢幕為縱向！');
+//     }
+//     if (window.orientation === 90 || window.orientation === -90 ){
+//         alert('目前您的螢幕為橫向！');
+//     }
+// }, false);
 
 const app = new Vue({
     data() {
@@ -71,6 +71,11 @@ const app = new Vue({
     },
     mounted() {
         this.getScreen()
+        if ("onorientationchange" in window) {
+            if (window.orientation === 180 || window.orientation === 0) this.isScreen = true
+            if (window.orientation === 90 || window.orientation === -90 ) this.isScreen = false
+        }
+        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", this.getScreen, false);
         window.addEventListener('resize', this.getScreen)
     },
     methods: {
@@ -79,8 +84,8 @@ const app = new Vue({
             const lineBet = document.getElementById('lineBet')
             const slotBet = document.getElementById('slotBet')
             const slotButton = document.getElementById('slotButton')
-            const screenWidth = window.innerWidth - 50
-            const screenHeight = window.innerHeight - 50
+            const screenWidth = window.innerWidth - 25
+            const screenHeight = window.innerHeight - 25
             
             if (screenWidth > screenHeight * 3 / 2) {
                 slotMachine.style.width = screenHeight * 3 / 2 + 'px'
@@ -95,9 +100,10 @@ const app = new Vue({
                 slotBet.style.fontSize = '4vw'
                 slotButton.style.fontSize = '2vw'
             }
-
-            if (screenWidth <= screenHeight) this.isScreen = true
-            else this.isScreen = false
+            if ("onorientationchange" in window) {
+                if (window.orientation === 180 || window.orientation === 0) this.isScreen = true
+                if (window.orientation === 90 || window.orientation === -90 ) this.isScreen = false
+            }
         },
 
         twoDigits(val) {
