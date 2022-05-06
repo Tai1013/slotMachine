@@ -223,6 +223,10 @@ const app = new Vue({
         getDetails(data) {
             this.detailsData.push(data)
         },
+
+        onClose() {
+            window.close();
+        }
     }
 })
 
