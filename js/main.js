@@ -28,12 +28,12 @@ const app = new Vue({
                 },
                 {
                     tile: [0, 1, 2],
-                    bet: 0.5,
+                    bet: 1,
                     class: 'line159'
                 },
                 {
                     tile: [2, 1, 0],
-                    bet: 0.5,
+                    bet: 1,
                     class: 'line357'
                 },
             ],
@@ -142,6 +142,7 @@ const app = new Vue({
             const doubleBet = this.bet * this.double    //倍率下注額
             let resultData = []
             this.currentDetails = []
+            this.currentWin = 0
             this.currentReel = [result[0][0].name, result[1][0].name, result[2][0].name, result[0][1].name, result[1][1].name, result[2][1].name, result[0][2].name, result[1][2].name, result[2][2].name]
             this.reelWinData.forEach((data, index) => {
                 const r1 = result[0][data.tile[0]]
@@ -158,9 +159,9 @@ const app = new Vue({
                 if (tile2Name == 'scatter' && tile3Name == 'scatter' && tile1Name != 'seven') tailBet = doubleBet * r1.bonus / 4
                 if (tile1Name == 'scatter' && tile3Name == 'scatter' && tile2Name != 'seven') tailBet = doubleBet * r2.bonus / 4
                 if (tile1Name == 'scatter' && tile2Name == 'scatter' && tile3Name != 'seven') tailBet = doubleBet * r3.bonus / 4
-                if (tile2Name == 'scatter' && tile1Name == tile3Name) tailBet = doubleBet * r1.bonus / 2
-                if (tile1Name == 'scatter' && tile2Name == tile3Name) tailBet = doubleBet * r2.bonus / 2
-                if (tile3Name == 'scatter' && tile1Name == tile2Name) tailBet = doubleBet * r2.bonus / 2
+                if (tile2Name == 'scatter' && tile1Name == tile3Name && tile1Name != 'seven') tailBet = doubleBet * r1.bonus / 2
+                if (tile1Name == 'scatter' && tile2Name == tile3Name && tile2Name != 'seven') tailBet = doubleBet * r2.bonus / 2
+                if (tile3Name == 'scatter' && tile1Name == tile2Name && tile1Name != 'seven') tailBet = doubleBet * r2.bonus / 2
 
                 if (tailBet > 0) {
                     resultData.push({
@@ -193,8 +194,8 @@ const app = new Vue({
                 time: this.currentTime,
                 bet: this.bet,
                 double: this.double,
-                winBet: this.currentWin - (this.bet * this.double),
-                winLoss: this.currentWin - (this.bet * this.double) >= 0 ? true : false,
+                winBet: this.currentWin > 0 ? this.currentWin : this.currentWin - (this.bet * this.double),
+                winLoss: this.currentWin > 0 ? true : false,
                 details: {
                     reel: this.currentReel,
                     win: this.currentDetails
@@ -233,42 +234,42 @@ Vue.component('slot-reel', {
                 {
                     name: 'seven',
                     image: 'img/seven.png',
-                    bonus: 64
+                    bonus: 16
                 },
                 {
                     name: 'scatter',
                     image: 'img/scatter.png',
-                    bonus: 16
+                    bonus: 8
                 },
                 {
                     name: 'cherry',
                     image: 'img/cherry.png',
-                    bonus: 8
+                    bonus: 2
                 },
                 {
                     name: 'grapes',
                     image: 'img/grapes.png',
-                    bonus: 8
+                    bonus: 2
                 },
                 {
                     name: 'watermelon',
                     image: 'img/watermelon.png',
-                    bonus: 4
+                    bonus: 1
                 },
                 {
                     name: 'plum',
                     image: 'img/plum.png',
-                    bonus: 4
+                    bonus: 1
                 },
                 {
                     name: 'lemon',
                     image: 'img/lemon.png',
-                    bonus: 1
+                    bonus: 0.5
                 },
                 {
                     name: 'orange',
                     image: 'img/orange.png',
-                    bonus: 1
+                    bonus: 0.5
                 },
 
             ],

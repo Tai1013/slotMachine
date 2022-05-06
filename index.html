@@ -229,7 +229,7 @@
                                 <td class="p-1">{{ detailsData[0].bet * detailsData[0].double }}</td>
                             </tr>
                             <tr>
-                                <td class="p-1">金額</td>
+                                <td class="p-1">輸贏金額</td>
                                 <td class="p-1">{{ detailsData[0].winBet }}</td>
                             </tr>
                             <tr>
@@ -247,11 +247,11 @@
                             <tr v-if="detailsData[0].details.win.length > 0">
                                 <td class="p-1">連線</td>
                                 <td class="p-1">
-                                    <div class="text-center" v-for="(item, index1) in detailsData[0].details.win" :key="index1">
-                                        <div class="mx-auto flex justify-center items-center flex-wrap w-24 h-8">
-                                            <img class="w-1/3" v-for="(tail, index2) in item.tail" :key="index2" :src=`img/${tail}.png` :alt="tail">
+                                    <div v-for="(item, index1) in detailsData[0].details.win" :key="index1">
+                                        <div class="mx-auto flex justify-center items-center">
+                                            <img class="w-8" v-for="(tail, index2) in item.tail" :key="index2" :src=`img/${tail}.png` :alt="tail">
+                                            <span class="mx-1">贏 :</span><span>{{ item.winBet }}</span>
                                         </div>
-                                        <p><span class="mr-1">贏 :</span><span>{{ item.winBet }}</span></p>
                                     </div>
                                 </td>
                             </tr>
