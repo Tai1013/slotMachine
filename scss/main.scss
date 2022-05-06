@@ -1,5 +1,9 @@
+$main_color: #d4a145;
+$back_color: #530c09;
+$linear_color: linear-gradient(45deg, #fcec88 0%, #ac5502 70%, #fcec88 100%);
+
 body {
-    background-color: #530c09;
+    background-color: $back_color;
     &::before {
         content: "";
         position: fixed;
@@ -23,11 +27,9 @@ input {
 }
 
 #slotMachineOutBox {
-    max-width: 100%;
-    width: 150vh;
-    // width: calc(var(--vh, 1vh) * 150);
-    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    // height: calc(var(--vh, 1vh) * 100);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #slotReels {
@@ -38,24 +40,16 @@ input {
 }
 
 #slotButton {
-    background: linear-gradient(45deg, #fcec88 0%, #ac5502 70%, #fcec88 100%);
+    background: $linear_color;
     > div {
-        background-color: #530c09;
-    }
-    #slotBet {
-        font-size: 6vh;
+        background-color: $back_color;
     }
     .slot-title {
-        font-size: 2.5vh;
-        color: #d4a145;
-    }
-    .slot-menu {
-        font-size: 2.5vh;
+        color: $main_color;
     }
     .slot-input {
-        font-size: 2.5vh;
         button {
-            background-color: #d4a145;
+            background-color: $main_color;
         }
         input {
             box-shadow: 0px 0px 4px #666 inset;
@@ -64,7 +58,7 @@ input {
 }
 
 .slot-btn {
-    color: #d4a145;
+    color: $main_color;
 }
 
 .reel-image {
@@ -149,20 +143,16 @@ input {
     }
 }
 
-.lineBet {
-    margin: 0;
-    padding: 0;
-    font-family: verdana;
-    font-size: 4rem;
-    font-weight: 700;
+#lineBet {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #fcec88;
-    text-shadow: -1px -1px 1px #faf9f1, 1px 1px 1px #d4a145, 1px 2px 1px #d4a145, 1px 3px 1px #d4a145, 1px 4px 1px #d4a145, 1px 5px 1px #d4a145, 1px 6px 1px #d4a145, 1px 7px 1px #d4a145, 1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2);
+    text-shadow: -1px -1px 1px #faf9f1, 1px 1px 1px $main_color, 1px 2px 1px $main_color, 1px 3px 1px $main_color, 1px 4px 1px $main_color, 1px 5px 1px $main_color, 1px 6px 1px $main_color, 1px 12px 6px rgba(16, 16, 16, 0.4);
     animation: winReelTile 1s linear 0.1s infinite;
 }
 
 @keyframes winReelTile {
     50% {
-        filter: drop-shadow(0 0 6px #fcec88);
+        filter: drop-shadow(0 0 3px #fcec88);
     }
 }
 

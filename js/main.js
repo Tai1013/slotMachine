@@ -66,8 +66,27 @@ const app = new Vue({
     },
     methods: {
         getScreen() {
-            const screenWidth = window.innerWidth
-            const screenHeight = window.innerHeight
+            const slotMachine = document.getElementById('slotMachineOutBox')
+            const lineBet = document.getElementById('lineBet')
+            const slotBet = document.getElementById('slotBet')
+            const slotButton = document.getElementById('slotButton')
+            const screenWidth = window.innerWidth - 5
+            const screenHeight = window.innerHeight - 5
+            
+            if (screenWidth > screenHeight * 3 / 2) {
+                slotMachine.style.width = screenHeight * 3 / 2 + 'px'
+                slotMachine.style.height = screenHeight + 'px'
+                lineBet.style.fontSize = '10vh'
+                slotBet.style.fontSize = '6vh'
+                slotButton.style.fontSize = '2.5vh'
+            } else {
+                slotMachine.style.width = screenWidth + 'px'
+                slotMachine.style.height = screenWidth * 2 / 3 + 'px'
+                lineBet.style.fontSize = '8vw'
+                slotBet.style.fontSize = '4vw'
+                slotButton.style.fontSize = '2vw'
+            }
+
             if (screenWidth <= screenHeight) this.isScreen = true
             else this.isScreen = false
         },
@@ -364,7 +383,7 @@ Vue.component('slot-line', {
         <svg v-if="line357" xmlns="http://www.w3.org/2000/svg" style="z-index: -1;" class="absolute top-0 left-0 w-full h-full" viewBox="0 0 220 150" fill="none" stroke="#fff" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M0 125 H35 L185 25 H220" />
         </svg>
-        <p v-if="lineBet > 0" class="lineBet flex justify-center items-center absolute left-0 w-full h-1/3 z-10" :class="lineTop">{{lineBet}}</p>
+        <p v-show="lineBet > 0" id="lineBet" class="absolute left-0 m-0 p-0 w-full h-1/3 flex justify-center items-center font-bold" :class="lineTop">{{lineBet}}</p>
     </div>`
 })
 
