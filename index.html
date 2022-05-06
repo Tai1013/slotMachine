@@ -174,7 +174,7 @@
                                         record.time }}</span></td>
                                 <td class="p-1">{{ record.id }}</td>
                                 <td class="p-1">{{ record.bet }}<span class="mx-1">/</span>{{ record.double }}</td>
-                                <td class="p-1">{{ record.winLoss ? '贏' : '輸' }}<span class="mx-1">/</span>{{
+                                <td class="p-1" :class="record.winLoss ? 'text-blue-400' : 'text-red-600'">{{ record.winLoss ? '贏' : '輸' }}<span class="mx-1">/</span>{{
                                     record.winBet }}</td>
                                 <td class="p-1">
                                     <button @click="getDetails(record)">詳情</button>
@@ -231,11 +231,11 @@
                             </tr>
                             <tr>
                                 <td class="p-1">輸贏金額</td>
-                                <td class="p-1">{{ detailsData[0].winBet }}</td>
+                                <td class="p-1" :class="detailsData[0].winLoss ? 'text-blue-400' : 'text-red-600'">{{ detailsData[0].winBet }}</td>
                             </tr>
                             <tr>
                                 <td class="p-1">輸贏</td>
-                                <td class="p-1">{{ detailsData[0].winLoss ? '贏' : '輸' }}</td>
+                                <td class="p-1" :class="detailsData[0].winLoss ? 'text-blue-400' : 'text-red-600'">{{ detailsData[0].winLoss ? '贏' : '輸' }}</td>
                             </tr>
                             <tr>
                                 <td class="p-1">原始版面</td>
