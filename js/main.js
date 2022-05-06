@@ -70,6 +70,7 @@ const app = new Vue({
     methods: {
         getScreen() {
             const slotMachine = document.getElementById('slotMachineOutBox')
+            const slotMachineID = document.getElementById('slotMachineID')
             const lineBet = document.getElementById('lineBet')
             const slotBet = document.getElementById('slotBet')
             const slotButton = document.getElementById('slotButton')
@@ -79,12 +80,14 @@ const app = new Vue({
             if (screenWidth > screenHeight * 3 / 2) {
                 slotMachine.style.width = screenHeight * 3 / 2 + 'px'
                 slotMachine.style.height = screenHeight + 'px'
+                slotMachineID.style.fontSize = '4vh'
                 lineBet.style.fontSize = '10vh'
                 slotBet.style.fontSize = '6vh'
                 slotButton.style.fontSize = '2.5vh'
             } else {
                 slotMachine.style.width = screenWidth + 'px'
                 slotMachine.style.height = screenWidth * 2 / 3 + 'px'
+                slotMachineID.style.fontSize = '3vw'
                 lineBet.style.fontSize = '8vw'
                 slotBet.style.fontSize = '4vw'
                 slotButton.style.fontSize = '2vw'

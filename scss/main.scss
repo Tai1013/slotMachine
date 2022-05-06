@@ -33,6 +33,12 @@ input {
     transform: translate(-50%, -50%);
 }
 
+#slotMachineID {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #slotReels {
     bottom: 4.5%;
     left: 8%;
