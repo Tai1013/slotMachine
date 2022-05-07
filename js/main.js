@@ -37,6 +37,10 @@ const app = new Vue({
                     class: 'line357'
                 },
             ],
+            audio: {
+                lock: new Audio('https://freesound.org/data/previews/56/56246_91374-lq.mp3'),
+                win: new Audio('https://freesound.org/data/previews/387/387232_1474204-lq.mp3'),
+            },
             recordShow: false,
             recordData: [],
             detailsData: [],
@@ -46,7 +50,6 @@ const app = new Vue({
             currentReel: [],
             currentWin: 0,
             currentDetails: [],
-
             isScreen: false
         }
     },
@@ -62,6 +65,9 @@ const app = new Vue({
             }
         }
     },
+    beforeMount() {
+        this.audio.lock.volume = 0.2
+    },
     mounted() {
         this.getScreen()
         window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", this.getScreen, false);
@@ -76,7 +82,7 @@ const app = new Vue({
             const slotButton = document.getElementById('slotButton')
             const screenWidth = window.innerWidth - 25
             const screenHeight = window.innerHeight - 25
-            
+
             if (screenWidth > screenHeight * 3 / 2) {
                 slotMachine.style.width = screenHeight * 3 / 2 + 'px'
                 slotMachine.style.height = screenHeight + 'px'
@@ -94,7 +100,7 @@ const app = new Vue({
             }
             if ("onorientationchange" in window) {
                 if (window.orientation === 180 || window.orientation === 0) this.isScreen = true
-                if (window.orientation === 90 || window.orientation === -90 ) this.isScreen = false
+                if (window.orientation === 90 || window.orientation === -90) this.isScreen = false
             }
         },
 
@@ -108,6 +114,7 @@ const app = new Vue({
         },
 
         start() {
+            this.audio.lock.play()
             const today = new Date()
             const min = 10
             const max = 30
@@ -181,6 +188,8 @@ const app = new Vue({
             if (resultData.length > 0) {
                 for (let i = 0; i < resultData.length; i++) {
                     setTimeout(() => {
+                        this.audio.win.currentTime = 0.3
+                        this.audio.win.play()
                         this.animate(resultData[i].class, resultData[i].winBet, (i + 1) == resultData.length)
                         this.totalBet += resultData[i].winBet
                         this.currentWin += resultData[i].winBet
@@ -280,9 +289,15 @@ Vue.component('slot-reel', {
                 },
 
             ],
+            audio: {
+                spin: new Audio('https://freesound.org/data/previews/120/120373_824230-lq.mp3'),
+                spinEnd: new Audio('https://freesound.org/data/previews/145/145441_2615119-lq.mp3'),
+            },
         }
     },
     beforeMount() {
+        this.audio.spin.volume = 0.3
+        this.audio.spinEnd.volume = 0.8
         let reels = []
         this.reelSourceData.forEach((data, index) => {
             let times = parseInt((index + 2) / 2)
@@ -316,6 +331,8 @@ Vue.component('slot-reel', {
             const reelTileHeight = document.getElementById('slotReels').clientHeight / 3
             let turns = 0, speed = 0
             setTimeout(() => {
+                this.audio.spin.currentTime = 0.3
+                this.audio.spin.play()
                 const runReel = setInterval(() => {
                     if (turns == maxTurns - 1 && speed > 5 && this.reelTileTop < reelTileHeight) {
                         speed--
@@ -331,6 +348,8 @@ Vue.component('slot-reel', {
                     }
                     if (turns == maxTurns) {
                         clearInterval(runReel)
+                        this.audio.spin.pause()
+                        this.audio.spinEnd.play()
                         let resultData = []
                         resultData.push(this.reelTileData[this.getTileIndex(this.reelTileIndex - 1)])
                         resultData.push(this.reelTileData[this.getTileIndex(this.reelTileIndex)])
